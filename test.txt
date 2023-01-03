@@ -1,0 +1,27 @@
+应用实例2：企业员工管理数据库(DBEM)，实验用
+◼ 员工信息表(employee)：员工编号、姓名、学历、生日、性别、工
+作时间、地址、电话号码、员工部门号
+◼ 部门信息表 (department)：部门编号、部门名、备注
+◼ 员工薪水情况表(salary)：员工编号、收入、支出
+CREATE TABLE employee (
+employeeID CHAR(6) NOT NULL PRIMARY KEY, /*员工号*/
+name CHAR(10) NOT NULL, /*姓名 */
+education CHAR(4) NOT NULL, /*学历*/
+birth DATE NOT NULL, /*出生日期*/
+gender TINYINT(1) NOT NULL DEFAULT 1, /*男 1 女 0*/
+workYear TINYINT(1), /*工作时间*/
+address VARCHAR(100), /*地址*/
+phone CHAR(12), /*电话号码*/
+departmentID CHAR(3) REFERENCES department(departmentID)
+);
+CREATE TABLE department (
+departmentID CHAR(3) PRIMARY KEY, /*部门编号*/
+departName CHAR(20) NOT NULL, /*部门名称*/
+comment VARCHAR(100) /*备注*/
+);
+CREATE TABLE salary (
+employeeID CHAR(6) REFERENCES employee(employeeID),
+income REAL, /*收入*/
+outcome REAL, /*支出*/
+PRIMARY KEY(employeeID)
+);
